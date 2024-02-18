@@ -1,8 +1,24 @@
 import Koa from 'koa';
+import ratelimit from 'koa-ratelimit';
 import { createHttpTerminator } from 'http-terminator';
 import { Server } from 'http';
 
 const app = new Koa();
+
+/***
+ * Simple, simple, rate limiting
+ * * Use db stored in memory, so this is unique to this process.
+ * * Limit things to `max` requests per `duration`.
+ ***/
+const storage = new Map();
+app.use(
+  ratelimit({
+    driver: 'memory',
+    db: storage,
+    duration: 1000,
+    max: 3,
+  }),
+);
 
 app.use((ctx) => {
   ctx.body = 'hello, world';
