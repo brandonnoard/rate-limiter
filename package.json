@@ -46,6 +46,7 @@
     "dotenv": "^16.3.1",
     "http-terminator": "^3.2.0",
     "koa": "^2.14.2",
+    "koa-ratelimit": "^5.1.0",
     "zod": "^3.22.1"
   },
   "devDependencies": {
