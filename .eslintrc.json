@@ -15,17 +15,17 @@
       "error",
       {
         "selector": ["typeLike", "interface"],
-        "format": ["PascalCase"],
+        "format": ["PascalCase"]
       },
       {
         "selector": ["function", "method"],
         "format": ["camelCase", "PascalCase"],
-        "leadingUnderscore": "allow",
+        "leadingUnderscore": "allow"
       },
       {
         "selector": ["variable"],
         "format": ["camelCase", "UPPER_CASE"],
-        "leadingUnderscore": "allow",
+        "leadingUnderscore": "allow"
       }
     ]
   }
