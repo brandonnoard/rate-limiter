@@ -1,0 +1,14 @@
+FROM node:20-bookworm-slim
+
+RUN apt-get update \
+  && apt-get install -y vim curl git gawk postgresql-client locales locales-all \
+  && apt-get clean \
+  && apt-get autoremove --purge \
+  && locale-gen en_US.UTF-8
+
+RUN addgroup --gid 10001 recollect \
+  && adduser --home /opt/recollect --shell /bin/bash --gid 10001 --uid 10001 --gecos "" --disabled-login recollect
+
+WORKDIR /opt/recollect/app
+USER recollect
+CMD ["/usr/local/bin/node", "--version"]

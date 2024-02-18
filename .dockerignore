@@ -1,0 +1,5 @@
+.devcontainer
+Dockerfile.development
+Dockerfile.deploy
+Operators.md
+prod-checklist.md

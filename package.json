@@ -1,0 +1,68 @@
+{
+  "name": "@recollect/test-rate-limit",
+  "version": "0.0.1",
+  "description": "Your Package description",
+  "author": "Routeware, Inc.",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
+  },
+  "bin": {
+    "node-app": "./dist/index.cjs"
+  },
+  "homepage": "https://github.com/recollect/engagement-backend-node-template",
+  "type": "module",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "login:registry": "npm login --scope=@recollect --auth-type=legacy --registry=https://npm.pkg.github.com",
+    "pg:create": "createdb -T template0 $PGDATABASE",
+    "pg:delete": "dropdb $PGDATABASE",
+    "pg:save:schema": "pg_dump --schema-only --no-owner > sql/schema.sql",
+    "pg:save:data": "pg_dump --data-only > sql/data.sql",
+    "pg:save": "npm run pg:save:schema && npm run pg:save:data",
+    "pg:load:schema": "psql -f sql/schema.sql",
+    "pg:load:data": "psql -f sql/data.sql",
+    "pg:init": "npm run pg:create && npm run pg:load:schema && npm run pg:load:data",
+    "pg:reset": "npm run pg:delete && npm run pg:init",
+    "clean": "rm -Rf node_modules",
+    "build": "tsup --clean src/index.ts",
+    "prepack": "rm -Rf package.tgz",
+    "postpack": "mv recollect-*.tgz package.tgz",
+    "start": "node --watch --import=tsx src/dev.ts --clear-screen=false",
+    "test": "echo 'replace the string in double quotes with jest'",
+    "test:coverage": "jest --verbose --coverage",
+    "lint": "eslint --ext .ts src",
+    "lint:fix": "eslint --fix --ext .ts src",
+    "prettier": "prettier --write --list-different '**/*.ts' '**/*.json'",
+    "prettier:check": "prettier --check '**/*.ts' '**/*.json'",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "commander": "^11.1.0",
+    "dotenv": "^16.3.1",
+    "http-terminator": "^3.2.0",
+    "koa": "^2.14.2",
+    "zod": "^3.22.1"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.5.0",
+    "@tsconfig/node20": "^20.1.1",
+    "@types/jest": "^29.5.2",
+    "@types/koa": "^2.13.9",
+    "@types/node": "^20.4.5",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
+    "eslint": "^8.42.0",
+    "husky": "^8.0.3",
+    "jest": "^29.5.0",
+    "prettier": "^3.0.0",
+    "ts-jest": "^29.1.0",
+    "tsup": "^8.0.1",
+    "tsx": "^3.12.9",
+    "typescript": "^5.1.6"
+  }
+}
